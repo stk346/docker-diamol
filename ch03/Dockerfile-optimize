@@ -1,0 +1,11 @@
+FROM diamol/node
+
+# 잘 바뀌지 않는 코드는 되도록 윗줄에 배치하는 것이 바람직함
+CMD ["node", "/web-ping/app.js"]
+
+ENV TARGET="blog.sixeyed.com" \
+    METHOD="HEAD" \
+    INTERVAL="3000"
+
+WORKDIR /web-ping
+COPY app.js .
