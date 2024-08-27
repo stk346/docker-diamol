@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+  todo-db:
+    image: diamol/postgres:11.5
+    restart: unless-stopped
+    environment:
+      - PGDATA=/var/lib/postgresql/data
+    volumes:
+      - type: bind
+        source: /data/postgres
+        target: /var/lib/postgresql/data
+    networks:
+      - app-net
+
+  todo-web:
+    image: diamol/ch06-todo-list
+    restart: unless-stopped
+    ports:
+      - "8050:80"
+    environment:
+      - Database:Provider-Postgres
+    depends_on:
+      - todo-db
+    secrets:
+      - source: postgres-connection
+        # secret 파일 경로 지정하면 오류 발생. 주석처리해서 기본 경로에 secret 위치하도록 설정
+#      - target: /app/config/secrets.json
+
+secrets:
+  postgres-connection:
+    file: postgres-connection.json
+
+networks:
+  app-net:
+      name: nat
+      external: true

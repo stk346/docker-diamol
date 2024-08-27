@@ -1,3 +1,5 @@
+# 이 파일은 아래의 명령어와 같음
+# docker container run -p 8020:80 --name todo-web --network nat diamol/ch06-todo-list
 version: '3.7'
 
 services:
@@ -10,6 +12,9 @@ services:
       - app-net
 
 networks:
+  # 서비스가 구성될 네트워크의 이름은 app-net이다.
   app-net:
+    # nat 네트워크가 이미 존재하므로 새로 생성하지 말라는 의미
     external:
+      # 이 네트워크는 nat이라는 이름의 외부 네트워크로 연결된다.
       name: nat
