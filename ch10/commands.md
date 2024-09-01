@@ -38,4 +38,9 @@
     * curl http://localhost:8089/list
       * 실행된 애플리케이션에 요청 보내기
     * docker container logs --tail 4 todo-dev-todo-web-1
-      * 애플리케이션 로그 확인하기
+      * 애플리케이션 로그 확인하기  
+  
+  * cd ./todo-list-configured
+  * 컴포즈로 애플리케이션을 실행할 때 대상 디렉터리에 .env파일이 존재하면 이 파일로부터 환경변수를 읽어 적용한다
+  * docker-compose up -d
+    * .env 파일의 환경변수를 읽어 적용함
